@@ -1,0 +1,479 @@
+/* --- Global Styles & Variables --- */
+:root {
+    --primary-color: #0d47a1; /* A deep blue, similar to the inspiration */
+    --secondary-color: #1565c0; /* A slightly lighter blue */
+    --accent-color: #ffc107; /* A warm yellow/gold accent */
+    --text-color: #333;
+    --light-text-color: #fff;
+    --background-color: #f4f7f6;
+    --border-color: #ddd;
+    --top-bar-height: 40px; /* Altezza stimata della top-bar */
+    --main-nav-height: 80px; /* Altezza stimata della main-nav */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+h1, h2, h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+a {
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.btn {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #e6a700;
+}
+
+/* --- Header Fixed Layout --- */
+header {
+    /* Rimuovi display: block e position: relative; da qui, non sono necessari per l'header contenitore */
+    z-index: 1000;
+}
+
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2000;
+    background: var(--primary-color);
+    color: var(--light-text-color);
+    padding: 8px 0;
+    font-size: 0.9em;
+    height: var(--top-bar-height); /* Aggiunto altezza fissa */
+    display: flex; /* Assicurati che sia flex per i suoi figli */
+    align-items: center; /* Centra verticalmente il contenuto */
+}
+
+.top-bar .container {
+    display: flex;
+    justify-content: space-between; /* Modificato da flex-end per distribuire gli elementi */
+    align-items: center; /* Centra verticalmente gli elementi nella top bar */
+    gap: 20px;
+    width: 100%; /* Assicurati che il container occupi tutta la larghezza */
+}
+
+.top-bar-left {
+    flex: 1;
+    text-align: left;
+}
+
+.top-bar-right {
+    flex: 1;
+    text-align: right;
+    display: flex; /* Rendi anche questo un flex container per i suoi span */
+    justify-content: flex-end; /* Allinea a destra gli elementi */
+    gap: 20px; /* Spazio tra telefono ed email */
+}
+
+.main-nav {
+    position: fixed;
+    top: var(--top-bar-height); /* Inizia sotto la top-bar */
+    left: 0;
+    width: 100%;
+    z-index: 1500;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    padding: 15px 0; /* Aggiungi padding per definire l'altezza */
+    min-height: var(--main-nav-height); /* Altezza minima per la nav */
+}
+
+.main-nav .container {
+    display: flex;
+    justify-content: space-between; /* Distribuisce il logo e i link */
+    align-items: center; /* Centra verticalmente gli elementi */
+    height: 100%; /* Assicurati che il container occupi l'altezza del main-nav */
+}
+
+.logo img {
+    height: 100%; /* Regola l'altezza del logo se necessario */
+    max-width: 100%; /* Assicurati che il logo non trabocchi */
+}
+
+.nav-links {
+    list-style: none;
+    display: flex; /* Rendi i link della nav orizzontali */
+    gap: 30px; /* Spazio tra i link */
+    margin: 0; /* Rimuovi margin per evitare posizionamenti strani */
+    padding: 0; /* Rimuovi padding */
+}
+
+.nav-links li a {
+    display: block;
+    padding: 5px 0;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s, color 0.3s;
+    color: var(--text-color); /* Colore di default per i link della nav */
+    font-weight: 500; /* Leggera enfasi per i link */
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+    text-decoration: none;
+}
+
+.menu-toggle {
+    display: none; /* Nascosto di default per desktop */
+    font-size: 2em;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--primary-color);
+}
+
+main {
+    /* Calcola il margin-top in base all'altezza combinata di top-bar e main-nav */
+    margin-top: calc(var(--top-bar-height) + var(--main-nav-height));
+}
+
+/* --- Hero Section --- */
+.hero {
+    position: relative;
+    height: 60vh;
+    color: var(--light-text-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+.hero-slide.active { opacity: 1; }
+
+.hero-slide::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1; /* Assicurati che l'overlay sia sotto il contenuto */
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 0 20px; /* Aggiungi padding per evitare che il testo tocchi i bordi su schermi piccoli */
+}
+.hero-content h1 {
+    font-size: 3.5em;
+    color: var(--light-text-color);
+    margin-bottom: 0.5em;
+}
+.hero-content p {
+    font-size: 1.2em;
+    margin-bottom: 1.5em;
+}
+
+/* --- Services Grid (Homepage) --- */
+.services-grid {
+    padding: 60px 0;
+    text-align: center;
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 30px;
+}
+.grid-item {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: transform 0.3s;
+}
+.grid-item:hover {
+    transform: translateY(-5px);
+}
+.icon-placeholder {
+    font-size: 3em;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+.learn-more {
+    font-weight: bold;
+    color: var(--secondary-color);
+}
+
+/* --- News Preview (Homepage) --- */
+.news-preview {
+    padding: 60px 0;
+    background-color: #fff;
+}
+.news-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+.news-card {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #fff;
+}
+.news-card img {
+    width: 100%;
+    height: 250px; /* Altezza fissa per le immagini delle news */
+    object-fit: cover; /* Assicura che l'immagine copra l'area senza distorcersi */
+    display: block;
+}
+.news-content {
+    padding: 20px;
+}
+.news-date {
+    font-size: 0.8em;
+    color: #777;
+    margin-bottom: 10px;
+    display: block;
+}
+.news-card h3 {
+    margin-top: 0;
+}
+.read-more {
+    display: inline-block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* --- Generic Page Content --- */
+.page-content {
+    padding: 60px 0;
+    background-color: #fff;
+    min-height: 60vh;
+}
+.page-content .container {
+    max-width: 900px;
+}
+
+/* --- Services List Page --- */
+.service-list {
+    margin-top: 40px;
+}
+.service-item {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 40px;
+    background: var(--background-color);
+    padding: 20px;
+    border-radius: 8px;
+}
+.service-item img {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/* --- Contact Page --- */
+.contact-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+    margin-top: 40px;
+}
+.contact-form form {
+    display: flex;
+    flex-direction: column;
+}
+.contact-form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.contact-form input,
+.contact-form textarea {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1em;
+}
+.contact-info {
+    background: var(--background-color);
+    padding: 20px;
+    border-radius: 8px;
+}
+.contact-info p {
+    margin-bottom: 1.5rem;
+}
+
+/* --- Footer --- */
+footer {
+    background-color: #2c3e50; /* A dark slate color */
+    color: #ecf0f1;
+    padding-top: 50px;
+}
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #34495e;
+}
+.footer-col h4 {
+    color: var(--light-text-color);
+    margin-bottom: 20px;
+}
+.footer-col ul {
+    list-style: none;
+}
+.footer-col li {
+    margin-bottom: 10px;
+}
+.footer-col a {
+    color: #bdc3c7;
+}
+.footer-col a:hover {
+    color: var(--light-text-color);
+    text-decoration: none;
+}
+.footer-bottom {
+    padding: 20px 0;
+    text-align: center;
+    font-size: 0.9em;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 992px) {
+    .grid-container, .news-container {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+    .service-item {
+        flex-direction: column;
+    }
+    .service-item img {
+        width: 100%;
+        height: 250px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Modifiche per la top-bar su mobile */
+    .top-bar {
+        display: none;
+    }
+
+    /* Dovrai anche aggiustare il margin-top del main content,
+       dato che la top-bar non c'è più */
+    main {
+        /* Calcola il margin-top solo in base all'altezza della main-nav su mobile */
+        margin-top: var(--main-nav-height); /* O un valore fisso se preferisci, es. 80px */
+    }
+
+    .main-nav .container {
+        flex-wrap: wrap; /* Permette agli elementi di andare a capo */
+        justify-content: space-between; /* Logo a sinistra, toggle a destra */
+    }
+
+    .logo {
+        flex-basis: auto; /* Ritorna alla sua dimensione naturale */
+        text-align: left; /* Allinea il logo a sinistra */
+        margin-bottom: 0; /* Rimuovi il margin-bottom se non serve */
+    }
+
+    .main-nav {
+        top: 0; /* Mantiene la stessa distanza dalla top-bar */
+        padding: 10px 0; /* Riduci il padding per schermi più piccoli */
+        min-height: auto; /* Rimuovi altezza minima fissa */
+    }
+
+    .nav-links {
+        display: none; /* Nascosto di default */
+        flex-direction: column;
+        width: 100%; /* Occupa tutta la larghezza sotto il logo/toggle */
+        position: absolute;
+        top: calc(var(--main-nav-height) - 15px); /* Posiziona sotto la nav-bar ridotta su mobile */
+        left: 0;
+        background-color: white;
+        text-align: center;
+        padding: 20px 0;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        z-index: 1499;
+        border-top: 1px solid var(--border-color);
+    }
+
+    /* Dovrai gestire l'attivazione/disattivazione con JavaScript per aggiungere la classe 'active' */
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links li {
+        margin-bottom: 15px;
+    }
+
+    .menu-toggle {
+        display: block; /* Mostra il toggle su mobile */
+        margin-left: 0;
+    }
+
+    main {
+        /* Ricalcola il margin-top per mobile se la nav ha un'altezza diversa */
+        /* Per ora, mantengo il calcolo originale, ma potresti doverlo regolare dinamicamente con JS */
+        margin-top: calc(var(--top-bar-height) + var(--main-nav-height)); /* Può essere necessario un valore fisso o JS per un'altezza più precisa */
+    }
+
+    .hero-content h1 {
+        font-size: 2.5em; /* Riduci la dimensione del titolo hero su mobile */
+    }
+
+    .grid-container, .news-container, .contact-layout {
+        grid-template-columns: 1fr;
+    }
+}
