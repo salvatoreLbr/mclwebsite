@@ -255,6 +255,12 @@ main {
     gap: 30px;
     margin-top: 30px;
 }
+.grid-container-circoli {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 30px;
+    margin-top: 30px;
+}
 .grid-item {
     background-color: #fff;
     padding: 30px;
@@ -325,23 +331,51 @@ main {
     max-width: 900px;
 }
 
+.img-chi-siamo{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%; /* Importantissimo: l'immagine non supererà mai il 100% della larghezza del genitore */
+    height: auto;    /* Mantiene le proporzioni */
+    margin-top: 20px;
+    margin-bottom: 20px;
+    box-sizing: border-box; /* Assicuriamo che padding e bordo siano inclusi nella larghezza totale */
+}
+
 /* --- Services List Page --- */
 .service-list {
     margin-top: 40px;
 }
 .service-item {
     display: flex;
+    align-items: center;
     gap: 30px;
     margin-bottom: 40px;
     background: var(--background-color);
     padding: 20px;
     border-radius: 8px;
 }
+.service-item .img-chi-siamo{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%; /* Importantissimo: l'immagine non supererà mai il 100% della larghezza del genitore */
+    height: auto;    /* Mantiene le proporzioni */
+    margin-top: 20px;
+    margin-bottom: 20px;
+    box-sizing: border-box; /* Assicuriamo che padding e bordo siano inclusi nella larghezza totale */
+}
+
 .service-item img {
     width: 300px;
     height: 200px;
     object-fit: cover;
     border-radius: 5px;
+}
+
+.service-item .service-description {
+    flex-grow: 1;
+    /* Non è necessario aggiungere nulla qui, l'allineamento è gestito dal genitore */
 }
 
 /* --- Contact Page --- */
@@ -421,12 +455,28 @@ footer {
     .footer-grid {
         grid-template-columns: 1fr;
     }
+    
     .service-item {
         flex-direction: column;
+        text-align: center;
+        /* Per la modalità colonna, align-items: center (che è il default per column)
+           centra orizzontalmente, il che è solitamente il comportamento desiderato.
+           Se volessi allineare a sinistra il testo su mobile anche in modalità colonna,
+           dovresti usare align-items: flex-start; qui e poi text-align: left;
+           sulla service-description o sui suoi figli. */
     }
+
     .service-item img {
         width: 100%;
         height: 250px;
+        object-fit: cover;
+        object-position: center top;
+    }
+
+    .service-item .img-chi-siamo{
+        /* Manteniamo le stesse regole di base, ma possiamo essere ancora più espliciti */
+        width: 100%; /* Assicuriamo che l'immagine occupi tutta la larghezza disponibile */
+        height: 390px;
     }
 }
 
@@ -501,5 +551,34 @@ footer {
 
     .grid-container, .news-container, .contact-layout {
         grid-template-columns: 1fr;
+    }
+
+    .service-item {
+        flex-direction: column;
+        text-align: center;
+        /* Per la modalità colonna, align-items: center (che è il default per column)
+           centra orizzontalmente, il che è solitamente il comportamento desiderato.
+           Se volessi allineare a sinistra il testo su mobile anche in modalità colonna,
+           dovresti usare align-items: flex-start; qui e poi text-align: left;
+           sulla service-description o sui suoi figli. */
+    }
+
+    .service-item img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        object-position: center top;
+    }
+
+    .img-chi-siamo{
+        /* Manteniamo le stesse regole di base, ma possiamo essere ancora più espliciti */
+        width: 100%; /* Assicuriamo che l'immagine occupi tutta la larghezza disponibile */
+        max-height: 100%;
+        height: auto;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        box-sizing: border-box; /* Ripetiamo per sicurezza, anche se ereditato */
+        padding: 0; /* Assicurati che l'immagine stessa non abbia padding indesiderato */
     }
 }
