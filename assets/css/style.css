@@ -8,7 +8,7 @@
     --background-color: #f4f7f6;
     --border-color: #ddd;
     --top-bar-height: 40px; /* Altezza stimata della top-bar */
-    --main-nav-height: 80px; /* Altezza stimata della main-nav */
+    --main-nav-height: 100px; /* Altezza stimata della main-nav */
 }
 
 * {
@@ -173,9 +173,35 @@ main {
     height: 60vh;
     color: var(--light-text-color);
     display: flex;
-    align-items: center;
     justify-content: center;
     text-align: center;
+}
+
+.slider-dots {
+    position: absolute;
+    bottom: 20px; /* Distanza dal bordo inferiore del hero */
+    left: 50%;
+    transform: translateX(-50%); /* Centra i puntini orizzontalmente */
+    z-index: 3; /* Assicurati che siano sopra le slide e l'overlay */
+    display: flex; /* Per allineare i puntini in orizzontale */
+    gap: 10px; /* Spazio tra i puntini */
+}
+
+.dot {
+    display: block;
+    width: 12px; /* Dimensione del puntino */
+    height: 12px;
+    border-radius: 50%; /* Rende il puntino circolare */
+    background-color: rgba(17, 59, 196, 0.534); /* Colore semi-trasparente */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    border: 1px solid rgba(0, 0, 0, 0.2); /* Bordo leggero per visibilità su sfondi chiari */
+}
+
+.dot.active {
+    background-color: var(--accent-color); /* Colore accentuato per il puntino attivo */
+    border-color: var(--accent-color);
+    transform: scale(1.2); /* Rendi il puntino attivo leggermente più grande */
 }
 
 .hero-slide {
@@ -198,7 +224,7 @@ main {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.0);
     z-index: 1; /* Assicurati che l'overlay sia sotto il contenuto */
 }
 
@@ -206,7 +232,7 @@ main {
     position: relative;
     z-index: 2;
     max-width: 800px;
-    padding: 0 20px; /* Aggiungi padding per evitare che il testo tocchi i bordi su schermi piccoli */
+    padding: 40px 20px; /* Aggiungi padding per evitare che il testo tocchi i bordi su schermi piccoli */
 }
 .hero-content h1 {
     font-size: 3.5em;
@@ -214,7 +240,7 @@ main {
     margin-bottom: 0.5em;
 }
 .hero-content p {
-    font-size: 1.2em;
+    font-size: 2em;
     margin-bottom: 1.5em;
 }
 
