@@ -96,7 +96,6 @@ document.addEventListener('DOMContentLoaded', function() {
         tableRows.forEach(row => {
             const lat = parseFloat(row.dataset.lat);
             const lng = parseFloat(row.dataset.lng);
-            console.log('lat:'+lat+" long:"+lng);
 
             // Prendi i dati dalla tabella per il popup del marker
             const luogo = row.querySelector('td:nth-child(1)').textContent;
