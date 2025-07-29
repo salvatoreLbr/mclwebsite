@@ -5,10 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movimento Cristiano Lavoratori | Home</title>
     <link rel="icon" type="image/png" href="assets/images/thumb.png">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="p4NxAoJBhfR57tMsaGDYhFxQzRPCH/K7X30Hn5pFg4o="
+    crossorigin=""/>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="p4NxAoJBhfR57tMsaGDYhFxQzRPCH/K7X30Hn5pFg4o="
+    crossorigin=""></script>
+    <script src="assets/js/script.js"></script>
     <header>
         <div class="top-bar">
             <div class="container top-bar-flex">
@@ -47,7 +53,103 @@
                     <div class="grid-item">
                         <div class="icon-placeholder">🏢</div>
                         <h3>Circoli</h3>
-                        <p>Lista dei circoli.</p>
+                        <div id="map" class="map-container"></div>
+                        <p>Di seguito i nostri circoli:</p>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Circolo</th>
+                                        <th>Indirizzo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <tr data-lat="45.3631469" data-lng="9.6851344">
+                                    <td>Unione Provinciale M.C.L. Crema A.P.S-E.T.S.</td>
+                                    <td>Via Vescovato n.18 Crema</td>
+                                </tr>
+                                <tr data-lat="45.1343204" data-lng="10.0305488">
+                                    <td>Circolo M.C.L. Cremona citta' A.P.S.-E.T.S.</td>
+                                    <td>Via Tofane n.18 Cremona</td>
+                                </tr>
+                                <tr data-lat="45.3641167" data-lng="9.6761121">
+                                    <td>Circolo M.C.L. Achille Grandi A.P.S.-E.T.S.</td>
+                                    <td>Via de Marchi n.14 Crema</td>
+                                </tr>
+                                <tr data-lat="45.3765017" data-lng="9.6947147">
+                                    <td>Circolo M.C.L. di Santa Maria della Croce A.P.S.-E.T.S.</td>
+                                    <td>Via Bergamo n.1 Crema</td>
+                                </tr>
+                                <tr data-lat="45.3581881" data-lng="9.6994128">
+                                    <td>Circolo M.C.L. di Castelnuovo A.P.S.-E.T.S.</td>
+                                    <td>Via Valsecchi a/b Crema</td>
+                                </tr>
+                                <tr data-lat="45.3629736" data-lng="9.6898769">
+                                    <td>Circolo M.C.L. Ora et Labora  A.P.S.-E.T.S.</td>
+                                    <td>Piazza Garibaldi n.57 Crema</td>
+                                </tr>
+                                <tr data-lat="45.3659937" data-lng="9.700419">
+                                    <td>Circolo M.C.L. Piergiorgio Frassati A.P.S.-E.T.S.</td>
+                                    <td>Via XI febbraio n.12 Crema</td>
+                                </tr>
+                                <tr data-lat="45.3605603" data-lng="9.6058362">
+                                    <td>Circolo M.C.L. di Bagnolo Cremasco A.P.S.-E.T.S.</td>
+                                    <td>Piazza Aldo Moro n.3 Bagnolo Cremasco</td>
+                                </tr>
+                                <tr data-lat="45.4398443" data-lng="9.6282901">
+                                    <td>Circolo M.C.L. di Farinate  A.P.S.-E.T.S.</td>
+                                    <td>Via Maggiore n.3 Farinate fraz. Capralba </td>
+                                </tr>
+                                <tr data-lat="45.3817525" data-lng="9.7403951">
+                                    <td>Circolo M.C.L. di Offanengo A.P.S.-E.T.S.</td>
+                                    <td>Via Babbiona, 5 Offanengo</td>
+                                </tr>
+                                <tr data-lat="45.3062521" data-lng="9.7025281">
+                                    <td>Circolo M.C.L. di Ripalta Guerina A.P.S.-E.T.S.</td>
+                                    <td>Piazza Trento Trieste n.1 Ripalta Guerina</td>
+                                </tr>
+                                <tr data-lat="45.3769945" data-lng="9.7843617">
+                                    <td>Circolo M.C.L. di Romanengo  A.P.S.-E.T.S.</td>
+                                    <td>Via Guaiarini n. 16 Romanengo</td>
+                                </tr>
+                                <tr data-lat="45.3995235" data-lng="9.4881019">
+                                    <td>Circolo M.C.L. Giuseppe Fanin  A.P.S.-E.T.S.</td>
+                                    <td>Via Roma n.22 Spino d'Adda</td>
+                                </tr>
+                                <tr data-lat="45.3715859" data-lng="9.5877946">
+                                    <td>Circolo M.C.L. di Vaiano Cremasco A.P.S.-E.T.S.</td>
+                                    <td>Via Asilo n.30 Vaiano Cremasco</td>
+                                </tr>
+                                <tr data-lat="45.4529237" data-lng="9.7097701">
+                                    <td>Circolo M.C.L. Vidolasco A.P.S.-E.T.S.</td>
+                                    <td>Via Umberto I n.2 Casale Cremasco Vidolasco</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>
+                            A Lodi e nel lodigiano potete trovarci tramite l'Unione Provinciale M.C.L. Lodi A.P.S-E.T.S., nei seguenti circoli:
+                        </p>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Circolo</th>
+                                        <th>Indirizzo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <tr data-lat="45.2978089" data-lng="9.5112253">
+                                    <td>M.C.L. Città di Lodi A.P.S.-E.T.S.</td>
+                                    <td>Viale Piacenza n. 45 Lodi</td>
+                                </tr>
+                                <tr data-lat="45.1828829" data-lng="9.4858625">
+                                    <td>M.C.L. Don Giovanni Minzoni A.P.S.-E.T.S.</td>
+                                    <td>Via Steffenini n.161 San Colombano al Lambro</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
